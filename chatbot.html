@@ -116,6 +116,12 @@
           setInputText(''); //sets the input to empty string after pressed send
         }
 
+        function keyPress(event) {
+          if (event.key === 'Enter') {
+            sendMessage();
+          }
+        }
+
         return (
           <div className="chat-input-container">
             <input 
@@ -123,6 +129,7 @@
               placeholder="Send a message to Chatbot"
               onChange={saveInputText}
               value={inputText}
+              onKeyDown={keyPress}
             />
             <button
               onClick={sendMessage}
