@@ -22,6 +22,8 @@
 
       body {
         font-family: Arial, Helvetica, sans-serif;
+        margin-top: 0px;
+        margin-bottom: 0px;
       }
 
       .send-button {
@@ -37,6 +39,7 @@
 
       .chat-input-container {
         display: flex;
+        margin-bottom: 60px;
       }
 
       .app-container {
@@ -44,6 +47,9 @@
         margin-left: auto;
         margin-right: auto;
         height: 100vh;
+        
+        display: flex;
+        flex-direction: column;
       }
 
       .user {
@@ -68,6 +74,13 @@
         margin-top: 20px;
         margin-bottom: 20px;
         max-width: 300px;
+      }
+
+      .chat-messages-container {
+        flex-grow: 1;
+        margin-top: 20px;
+        overflow: scroll;
+        scrollbar-width: none;
       }
     </style>
   </head>
@@ -129,7 +142,7 @@
               placeholder="Send a message to Chatbot"
               onChange={saveInputText}
               value={inputText}
-              onKeyDown={keyPress}
+              onKeyDown={keyPress} //when pressed on the key run the function
             />
             <button
               onClick={sendMessage}
@@ -173,8 +186,18 @@
       }
 
       function ChatMessages({ chatMessages }) {
+        const chatMessageRef = React.useRef(null); //uses of hooks to make the page autoscroll
+
+
+        React.useEffect(() => {
+          const containerElem = chatMessageRef.current;
+          if (containerElem) {
+            containerElem.scrollTop = containerElem.scrollHeight // if the container exist make the scroll, scroll all the way to the max height of the page (bottom)
+          }
+        }, [chatMessages]);
+
         return (
-          <>
+          <div className="chat-messages-container" ref={chatMessageRef}>
             {chatMessages.map((chatMessage) => {
                   return (
                     <ChatMessage 
@@ -184,31 +207,14 @@
                     />
                   );
                 })}
-          </>
+              </div>
         );
       }
 
 
 
       function App() {
-        const array = React.useState(
-            [{
-            message: 'hello Chatbot',
-            sender: 'user',
-            id: 'id1'
-          }, {
-            message: 'Hello! How can I help you?',
-            sender: 'robot',
-            id: 'id2'
-          }, {
-            message: 'What is todays date',
-            sender: 'user',
-            id: 'id3'
-          }, {
-            message: 'Todat is February 22',
-            sender: 'robot',
-            id: 'id4'
-          }]);
+        const array = React.useState([]);
         const chatMessages = array[0]; //a copy of the arrayvalue
         const setChatMessages = array[1];
         
