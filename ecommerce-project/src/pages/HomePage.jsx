@@ -1,14 +1,18 @@
 import './HomePage.css';
+import { useEffect, useState } from '@vitejs/plugin-react'
+import axios from 'axios'
 import { Header } from '../components/Header';
-import { products } from '../../starting-code/data/products';
 
 export function HomePage() {
-  fetch('http://localhost:3000/api/products')   //pulls data from the backend
-    .then((response) => {
-      return response.json()
-    }).then((data)=> {
+  const [products, setProducts] = useState([]);
 
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/products')
+    .then((response) => {
+      setProducts(response.data);
     });
+  }, []);
 
   return (
     <>
