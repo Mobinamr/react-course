@@ -6,5 +6,15 @@ export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
     exclude: ['fsevents']
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000'
+      },
+      '/images': {
+        target: 'http://localhost:3000'
+      }
+    }
   }
 })
