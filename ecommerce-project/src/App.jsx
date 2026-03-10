@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router';
+import { Routes, Route, UNSAFE_AwaitContextProvider } from 'react-router';
 import './App.css'
 import { HomePage } from './pages/home/HomePage';
 import { CheckoutPage } from './pages/checkout/CheckoutPage';
@@ -11,9 +11,12 @@ function App() {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/cart-items?expand=product').then((response) => {
+    const fetchAppData = async () => {
+      const response = await axios.get('/api/cart-items?expand=product')
       setCart(response.data);
-    });
+    }
+    
+    fetchAppData()
   }, [])
 
   return (
