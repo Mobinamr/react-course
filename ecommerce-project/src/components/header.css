@@ -40,7 +40,8 @@
 
 .header .logo {
   height: 26px;
-  margin-top: 1px;
+  padding-bottom: 3px;
+  padding-top: 3px;
 }
 
 .header .mobile-logo {
