@@ -1,4 +1,6 @@
-export function CheckoutHeader() {
+export function CheckoutHeader({ paymentSummary }) {
+
+
   return (
     <div className="checkout-header">
       <div className="header-content">
@@ -9,10 +11,12 @@ export function CheckoutHeader() {
           </a>
         </div>
 
-        <div className="checkout-header-middle-section">
-          Checkout (<a className="return-to-home-link"
-            href="/">3 items</a>)
-        </div>
+        {paymentSummary && (
+          <div className="checkout-header-middle-section">
+            Checkout (<a className="return-to-home-link"
+              href="/">{paymentSummary.totalItems} items</a>)
+          </div>
+        )};
 
         <div className="checkout-header-right-section">
           <img src="images/icons/checkout-lock-icon.png" />
