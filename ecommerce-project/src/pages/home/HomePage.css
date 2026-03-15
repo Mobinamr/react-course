@@ -68,8 +68,8 @@
 .home-page .product-container {
   padding-top: 40px;
   padding-bottom: 25px;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-left: 0px;
+  padding-right: 0px;
 
   border-right: 1px solid rgb(240, 240, 240);
   border-bottom: 1px solid rgb(240, 240, 240);
